@@ -93,49 +93,115 @@ export const ResultTestUpdate = (props: IResultTestUpdateProps) => {
                   name="finishedAt"
                   placeholder={'YYYY-MM-DD HH:mm'}
                   value={isNew ? displayDefaultDateTime() : convertDateTimeFromServer(props.resultTestEntity.finishedAt)}
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                  }}
                 />
               </AvGroup>
               <AvGroup>
                 <Label id="demonstrativeTypeLabel" for="result-test-demonstrativeType">
                   <Translate contentKey="psychologicallyTestBackendApp.resultTest.demonstrativeType">Demonstrative Type</Translate>
                 </Label>
-                <AvField id="result-test-demonstrativeType" type="string" className="form-control" name="demonstrativeType" />
+                <AvField
+                  id="result-test-demonstrativeType"
+                  type="string"
+                  className="form-control"
+                  name="demonstrativeType"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                    number: { value: true, errorMessage: translate('entity.validation.number') },
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="stuckTypeLabel" for="result-test-stuckType">
                   <Translate contentKey="psychologicallyTestBackendApp.resultTest.stuckType">Stuck Type</Translate>
                 </Label>
-                <AvField id="result-test-stuckType" type="string" className="form-control" name="stuckType" />
+                <AvField
+                  id="result-test-stuckType"
+                  type="string"
+                  className="form-control"
+                  name="stuckType"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                    number: { value: true, errorMessage: translate('entity.validation.number') },
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="pedanticTypeLabel" for="result-test-pedanticType">
                   <Translate contentKey="psychologicallyTestBackendApp.resultTest.pedanticType">Pedantic Type</Translate>
                 </Label>
-                <AvField id="result-test-pedanticType" type="string" className="form-control" name="pedanticType" />
+                <AvField
+                  id="result-test-pedanticType"
+                  type="string"
+                  className="form-control"
+                  name="pedanticType"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                    number: { value: true, errorMessage: translate('entity.validation.number') },
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="excitableTypeLabel" for="result-test-excitableType">
                   <Translate contentKey="psychologicallyTestBackendApp.resultTest.excitableType">Excitable Type</Translate>
                 </Label>
-                <AvField id="result-test-excitableType" type="string" className="form-control" name="excitableType" />
+                <AvField
+                  id="result-test-excitableType"
+                  type="string"
+                  className="form-control"
+                  name="excitableType"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                    number: { value: true, errorMessage: translate('entity.validation.number') },
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="hyperthymicTypeLabel" for="result-test-hyperthymicType">
                   <Translate contentKey="psychologicallyTestBackendApp.resultTest.hyperthymicType">Hyperthymic Type</Translate>
                 </Label>
-                <AvField id="result-test-hyperthymicType" type="string" className="form-control" name="hyperthymicType" />
+                <AvField
+                  id="result-test-hyperthymicType"
+                  type="string"
+                  className="form-control"
+                  name="hyperthymicType"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                    number: { value: true, errorMessage: translate('entity.validation.number') },
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="dysthymicTypeLabel" for="result-test-dysthymicType">
                   <Translate contentKey="psychologicallyTestBackendApp.resultTest.dysthymicType">Dysthymic Type</Translate>
                 </Label>
-                <AvField id="result-test-dysthymicType" type="string" className="form-control" name="dysthymicType" />
+                <AvField
+                  id="result-test-dysthymicType"
+                  type="string"
+                  className="form-control"
+                  name="dysthymicType"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                    number: { value: true, errorMessage: translate('entity.validation.number') },
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="anxiouslyFearfulTypeLabel" for="result-test-anxiouslyFearfulType">
                   <Translate contentKey="psychologicallyTestBackendApp.resultTest.anxiouslyFearfulType">Anxiously Fearful Type</Translate>
                 </Label>
-                <AvField id="result-test-anxiouslyFearfulType" type="string" className="form-control" name="anxiouslyFearfulType" />
+                <AvField
+                  id="result-test-anxiouslyFearfulType"
+                  type="string"
+                  className="form-control"
+                  name="anxiouslyFearfulType"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                    number: { value: true, errorMessage: translate('entity.validation.number') },
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="emotionallyExaltedTypeLabel" for="result-test-emotionallyExaltedType">
@@ -143,13 +209,31 @@ export const ResultTestUpdate = (props: IResultTestUpdateProps) => {
                     Emotionally Exalted Type
                   </Translate>
                 </Label>
-                <AvField id="result-test-emotionallyExaltedType" type="string" className="form-control" name="emotionallyExaltedType" />
+                <AvField
+                  id="result-test-emotionallyExaltedType"
+                  type="string"
+                  className="form-control"
+                  name="emotionallyExaltedType"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                    number: { value: true, errorMessage: translate('entity.validation.number') },
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="emotiveTypeLabel" for="result-test-emotiveType">
                   <Translate contentKey="psychologicallyTestBackendApp.resultTest.emotiveType">Emotive Type</Translate>
                 </Label>
-                <AvField id="result-test-emotiveType" type="string" className="form-control" name="emotiveType" />
+                <AvField
+                  id="result-test-emotiveType"
+                  type="string"
+                  className="form-control"
+                  name="emotiveType"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                    number: { value: true, errorMessage: translate('entity.validation.number') },
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="cyclothymicTypeLabel" for="result-test-cyclothymicType">
@@ -161,7 +245,7 @@ export const ResultTestUpdate = (props: IResultTestUpdateProps) => {
                 <Label for="result-test-user">
                   <Translate contentKey="psychologicallyTestBackendApp.resultTest.user">User</Translate>
                 </Label>
-                <AvInput id="result-test-user" type="select" className="form-control" name="user.id">
+                <AvInput id="result-test-user" type="select" className="form-control" name="userId">
                   <option value="" key="0" />
                   {users
                     ? users.map(otherEntity => (

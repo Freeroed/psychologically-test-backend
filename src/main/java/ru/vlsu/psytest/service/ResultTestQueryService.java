@@ -18,12 +18,14 @@ import ru.vlsu.psytest.domain.ResultTest;
 import ru.vlsu.psytest.domain.*; // for static metamodels
 import ru.vlsu.psytest.repository.ResultTestRepository;
 import ru.vlsu.psytest.service.dto.ResultTestCriteria;
+import ru.vlsu.psytest.service.dto.ResultTestDTO;
+import ru.vlsu.psytest.service.mapper.ResultTestMapper;
 
 /**
  * Service for executing complex queries for {@link ResultTest} entities in the database.
  * The main input is a {@link ResultTestCriteria} which gets converted to {@link Specification},
  * in a way that all the filters must apply.
- * It returns a {@link List} of {@link ResultTest} or a {@link Page} of {@link ResultTest} which fulfills the criteria.
+ * It returns a {@link List} of {@link ResultTestDTO} or a {@link Page} of {@link ResultTestDTO} which fulfills the criteria.
  */
 @Service
 @Transactional(readOnly = true)
@@ -33,33 +35,37 @@ public class ResultTestQueryService extends QueryService<ResultTest> {
 
     private final ResultTestRepository resultTestRepository;
 
-    public ResultTestQueryService(ResultTestRepository resultTestRepository) {
+    private final ResultTestMapper resultTestMapper;
+
+    public ResultTestQueryService(ResultTestRepository resultTestRepository, ResultTestMapper resultTestMapper) {
         this.resultTestRepository = resultTestRepository;
+        this.resultTestMapper = resultTestMapper;
     }
 
     /**
-     * Return a {@link List} of {@link ResultTest} which matches the criteria from the database.
+     * Return a {@link List} of {@link ResultTestDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
     @Transactional(readOnly = true)
-    public List<ResultTest> findByCriteria(ResultTestCriteria criteria) {
+    public List<ResultTestDTO> findByCriteria(ResultTestCriteria criteria) {
         log.debug("find by criteria : {}", criteria);
         final Specification<ResultTest> specification = createSpecification(criteria);
-        return resultTestRepository.findAll(specification);
+        return resultTestMapper.toDto(resultTestRepository.findAll(specification));
     }
 
     /**
-     * Return a {@link Page} of {@link ResultTest} which matches the criteria from the database.
+     * Return a {@link Page} of {@link ResultTestDTO} which matches the criteria from the database.
      * @param criteria The object which holds all the filters, which the entities should match.
      * @param page The page, which should be returned.
      * @return the matching entities.
      */
     @Transactional(readOnly = true)
-    public Page<ResultTest> findByCriteria(ResultTestCriteria criteria, Pageable page) {
+    public Page<ResultTestDTO> findByCriteria(ResultTestCriteria criteria, Pageable page) {
         log.debug("find by criteria : {}, page: {}", criteria, page);
         final Specification<ResultTest> specification = createSpecification(criteria);
-        return resultTestRepository.findAll(specification, page);
+        return resultTestRepository.findAll(specification, page)
+            .map(resultTestMapper::toDto);
     }
 
     /**

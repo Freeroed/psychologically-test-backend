@@ -97,7 +97,7 @@ export const ResultTestDetail = (props: IResultTestDetailProps) => {
           <dt>
             <Translate contentKey="psychologicallyTestBackendApp.resultTest.user">User</Translate>
           </dt>
-          <dd>{resultTestEntity.user ? resultTestEntity.user.id : ''}</dd>
+          <dd>{resultTestEntity.userId ? resultTestEntity.userId : ''}</dd>
         </dl>
         <Button tag={Link} to="/result-test" replace color="info">
           <FontAwesomeIcon icon="arrow-left" />{' '}

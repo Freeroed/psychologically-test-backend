@@ -40,7 +40,7 @@ export const QuestionDetail = (props: IQuestionDetailProps) => {
           <dt>
             <Translate contentKey="psychologicallyTestBackendApp.question.questionType">Question Type</Translate>
           </dt>
-          <dd>{questionEntity.questionType ? questionEntity.questionType.id : ''}</dd>
+          <dd>{questionEntity.questionTypeId ? questionEntity.questionTypeId : ''}</dd>
         </dl>
         <Button tag={Link} to="/question" replace color="info">
           <FontAwesomeIcon icon="arrow-left" />{' '}

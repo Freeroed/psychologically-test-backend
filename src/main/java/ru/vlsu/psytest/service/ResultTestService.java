@@ -1,24 +1,49 @@
 package ru.vlsu.psytest.service;
 
 import ru.vlsu.psytest.domain.ResultTest;
+import ru.vlsu.psytest.repository.ResultTestRepository;
+import ru.vlsu.psytest.service.dto.ResultTestDTO;
+import ru.vlsu.psytest.service.mapper.ResultTestMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 /**
- * Service Interface for managing {@link ResultTest}.
+ * Service Implementation for managing {@link ResultTest}.
  */
-public interface ResultTestService {
+@Service
+@Transactional
+public class ResultTestService {
+
+    private final Logger log = LoggerFactory.getLogger(ResultTestService.class);
+
+    private final ResultTestRepository resultTestRepository;
+
+    private final ResultTestMapper resultTestMapper;
+
+    public ResultTestService(ResultTestRepository resultTestRepository, ResultTestMapper resultTestMapper) {
+        this.resultTestRepository = resultTestRepository;
+        this.resultTestMapper = resultTestMapper;
+    }
 
     /**
      * Save a resultTest.
      *
-     * @param resultTest the entity to save.
+     * @param resultTestDTO the entity to save.
      * @return the persisted entity.
      */
-    ResultTest save(ResultTest resultTest);
+    public ResultTestDTO save(ResultTestDTO resultTestDTO) {
+        log.debug("Request to save ResultTest : {}", resultTestDTO);
+        ResultTest resultTest = resultTestMapper.toEntity(resultTestDTO);
+        resultTest = resultTestRepository.save(resultTest);
+        return resultTestMapper.toDto(resultTest);
+    }
 
     /**
      * Get all the resultTests.
@@ -26,21 +51,34 @@ public interface ResultTestService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Page<ResultTest> findAll(Pageable pageable);
+    @Transactional(readOnly = true)
+    public Page<ResultTestDTO> findAll(Pageable pageable) {
+        log.debug("Request to get all ResultTests");
+        return resultTestRepository.findAll(pageable)
+            .map(resultTestMapper::toDto);
+    }
 
 
     /**
-     * Get the "id" resultTest.
+     * Get one resultTest by id.
      *
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<ResultTest> findOne(Long id);
+    @Transactional(readOnly = true)
+    public Optional<ResultTestDTO> findOne(Long id) {
+        log.debug("Request to get ResultTest : {}", id);
+        return resultTestRepository.findById(id)
+            .map(resultTestMapper::toDto);
+    }
 
     /**
-     * Delete the "id" resultTest.
+     * Delete the resultTest by id.
      *
      * @param id the id of the entity.
      */
-    void delete(Long id);
+    public void delete(Long id) {
+        log.debug("Request to delete ResultTest : {}", id);
+        resultTestRepository.deleteById(id);
+    }
 }

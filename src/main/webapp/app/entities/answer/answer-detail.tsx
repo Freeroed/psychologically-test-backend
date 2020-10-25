@@ -34,11 +34,11 @@ export const AnswerDetail = (props: IAnswerDetailProps) => {
           <dt>
             <Translate contentKey="psychologicallyTestBackendApp.answer.question">Question</Translate>
           </dt>
-          <dd>{answerEntity.question ? answerEntity.question.id : ''}</dd>
+          <dd>{answerEntity.questionId ? answerEntity.questionId : ''}</dd>
           <dt>
             <Translate contentKey="psychologicallyTestBackendApp.answer.resultTest">Result Test</Translate>
           </dt>
-          <dd>{answerEntity.resultTest ? answerEntity.resultTest.id : ''}</dd>
+          <dd>{answerEntity.resultTestId ? answerEntity.resultTestId : ''}</dd>
         </dl>
         <Button tag={Link} to="/answer" replace color="info">
           <FontAwesomeIcon icon="arrow-left" />{' '}

@@ -6,7 +6,7 @@
     <!--
         Added the constraints for entity ResultTest.
     -->
-    <changeSet id="20201025183409-2" author="jhipster">
+    <changeSet id="20201025192348-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="result_test"

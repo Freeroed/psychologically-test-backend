@@ -106,13 +106,29 @@ export const QuestionTypeUpdate = (props: IQuestionTypeUpdateProps) => {
                 <Label id="coefficientLabel" for="question-type-coefficient">
                   <Translate contentKey="psychologicallyTestBackendApp.questionType.coefficient">Coefficient</Translate>
                 </Label>
-                <AvField id="question-type-coefficient" type="string" className="form-control" name="coefficient" />
+                <AvField
+                  id="question-type-coefficient"
+                  type="string"
+                  className="form-control"
+                  name="coefficient"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                    number: { value: true, errorMessage: translate('entity.validation.number') },
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="descriptionLabel" for="question-type-description">
                   <Translate contentKey="psychologicallyTestBackendApp.questionType.description">Description</Translate>
                 </Label>
-                <AvField id="question-type-description" type="text" name="description" />
+                <AvField
+                  id="question-type-description"
+                  type="text"
+                  name="description"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                  }}
+                />
               </AvGroup>
               <Button tag={Link} id="cancel-save" to="/question-type" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />

@@ -4,6 +4,8 @@ import ru.vlsu.psytest.PsychologicallyTestBackendApp;
 import ru.vlsu.psytest.domain.QuestionType;
 import ru.vlsu.psytest.repository.QuestionTypeRepository;
 import ru.vlsu.psytest.service.QuestionTypeService;
+import ru.vlsu.psytest.service.dto.QuestionTypeDTO;
+import ru.vlsu.psytest.service.mapper.QuestionTypeMapper;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -42,6 +44,9 @@ public class QuestionTypeResourceIT {
 
     @Autowired
     private QuestionTypeRepository questionTypeRepository;
+
+    @Autowired
+    private QuestionTypeMapper questionTypeMapper;
 
     @Autowired
     private QuestionTypeService questionTypeService;
@@ -91,9 +96,10 @@ public class QuestionTypeResourceIT {
     public void createQuestionType() throws Exception {
         int databaseSizeBeforeCreate = questionTypeRepository.findAll().size();
         // Create the QuestionType
+        QuestionTypeDTO questionTypeDTO = questionTypeMapper.toDto(questionType);
         restQuestionTypeMockMvc.perform(post("/api/question-types")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(questionType)))
+            .content(TestUtil.convertObjectToJsonBytes(questionTypeDTO)))
             .andExpect(status().isCreated());
 
         // Validate the QuestionType in the database
@@ -112,11 +118,12 @@ public class QuestionTypeResourceIT {
 
         // Create the QuestionType with an existing ID
         questionType.setId(1L);
+        QuestionTypeDTO questionTypeDTO = questionTypeMapper.toDto(questionType);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restQuestionTypeMockMvc.perform(post("/api/question-types")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(questionType)))
+            .content(TestUtil.convertObjectToJsonBytes(questionTypeDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the QuestionType in the database
@@ -124,6 +131,66 @@ public class QuestionTypeResourceIT {
         assertThat(questionTypeList).hasSize(databaseSizeBeforeCreate);
     }
 
+
+    @Test
+    @Transactional
+    public void checkTypeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = questionTypeRepository.findAll().size();
+        // set the field null
+        questionType.setType(null);
+
+        // Create the QuestionType, which fails.
+        QuestionTypeDTO questionTypeDTO = questionTypeMapper.toDto(questionType);
+
+
+        restQuestionTypeMockMvc.perform(post("/api/question-types")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(questionTypeDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<QuestionType> questionTypeList = questionTypeRepository.findAll();
+        assertThat(questionTypeList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkCoefficientIsRequired() throws Exception {
+        int databaseSizeBeforeTest = questionTypeRepository.findAll().size();
+        // set the field null
+        questionType.setCoefficient(null);
+
+        // Create the QuestionType, which fails.
+        QuestionTypeDTO questionTypeDTO = questionTypeMapper.toDto(questionType);
+
+
+        restQuestionTypeMockMvc.perform(post("/api/question-types")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(questionTypeDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<QuestionType> questionTypeList = questionTypeRepository.findAll();
+        assertThat(questionTypeList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkDescriptionIsRequired() throws Exception {
+        int databaseSizeBeforeTest = questionTypeRepository.findAll().size();
+        // set the field null
+        questionType.setDescription(null);
+
+        // Create the QuestionType, which fails.
+        QuestionTypeDTO questionTypeDTO = questionTypeMapper.toDto(questionType);
+
+
+        restQuestionTypeMockMvc.perform(post("/api/question-types")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(questionTypeDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<QuestionType> questionTypeList = questionTypeRepository.findAll();
+        assertThat(questionTypeList).hasSize(databaseSizeBeforeTest);
+    }
 
     @Test
     @Transactional
@@ -168,7 +235,7 @@ public class QuestionTypeResourceIT {
     @Transactional
     public void updateQuestionType() throws Exception {
         // Initialize the database
-        questionTypeService.save(questionType);
+        questionTypeRepository.saveAndFlush(questionType);
 
         int databaseSizeBeforeUpdate = questionTypeRepository.findAll().size();
 
@@ -180,10 +247,11 @@ public class QuestionTypeResourceIT {
             .type(UPDATED_TYPE)
             .coefficient(UPDATED_COEFFICIENT)
             .description(UPDATED_DESCRIPTION);
+        QuestionTypeDTO questionTypeDTO = questionTypeMapper.toDto(updatedQuestionType);
 
         restQuestionTypeMockMvc.perform(put("/api/question-types")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(updatedQuestionType)))
+            .content(TestUtil.convertObjectToJsonBytes(questionTypeDTO)))
             .andExpect(status().isOk());
 
         // Validate the QuestionType in the database
@@ -200,10 +268,13 @@ public class QuestionTypeResourceIT {
     public void updateNonExistingQuestionType() throws Exception {
         int databaseSizeBeforeUpdate = questionTypeRepository.findAll().size();
 
+        // Create the QuestionType
+        QuestionTypeDTO questionTypeDTO = questionTypeMapper.toDto(questionType);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restQuestionTypeMockMvc.perform(put("/api/question-types")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(questionType)))
+            .content(TestUtil.convertObjectToJsonBytes(questionTypeDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the QuestionType in the database
@@ -215,7 +286,7 @@ public class QuestionTypeResourceIT {
     @Transactional
     public void deleteQuestionType() throws Exception {
         // Initialize the database
-        questionTypeService.save(questionType);
+        questionTypeRepository.saveAndFlush(questionType);
 
         int databaseSizeBeforeDelete = questionTypeRepository.findAll().size();
 

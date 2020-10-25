@@ -4,23 +4,26 @@
     {
       "fieldName": "type",
       "fieldType": "Psychotype",
-      "fieldValues": "DEMONSTRATIVE_TYPE,STUCK_TYPE,PEDANTIC_TYPE,EXCITABLE_TYPE,HYPERTHYMIC_TYPE,DYSTHYMIC_TYPE,ANXIOUSLY_FEARFULL_TYPE,EMOTIONALLY_TYPE,EMOTIVE_TYPE,CYCLOTHYMIC_TYPE"
+      "fieldValues": "DEMONSTRATIVE_TYPE,STUCK_TYPE,PEDANTIC_TYPE,EXCITABLE_TYPE,HYPERTHYMIC_TYPE,DYSTHYMIC_TYPE,ANXIOUSLY_FEARFULL_TYPE,EMOTIONALLY_TYPE,EMOTIVE_TYPE,CYCLOTHYMIC_TYPE",
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "coefficient",
-      "fieldType": "Integer"
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "description",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
     }
   ],
   "relationships": [],
-  "changelogDate": "20201025183709",
+  "changelogDate": "20201025192648",
   "entityTableName": "question_type",
-  "dto": "no",
+  "dto": "mapstruct",
   "pagination": "no",
-  "service": "serviceImpl",
+  "service": "serviceClass",
   "jpaMetamodelFiltering": false,
   "fluentMethods": true,
   "readOnly": false,

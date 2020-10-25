@@ -6,7 +6,7 @@
     <!--
         Added the constraints for entity Answer.
     -->
-    <changeSet id="20201025183509-2" author="jhipster">
+    <changeSet id="20201025192448-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="question_id"
                                  baseTableName="answer"

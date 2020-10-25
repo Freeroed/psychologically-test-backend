@@ -6,6 +6,8 @@ import ru.vlsu.psytest.domain.Question;
 import ru.vlsu.psytest.domain.ResultTest;
 import ru.vlsu.psytest.repository.AnswerRepository;
 import ru.vlsu.psytest.service.AnswerService;
+import ru.vlsu.psytest.service.dto.AnswerDTO;
+import ru.vlsu.psytest.service.mapper.AnswerMapper;
 import ru.vlsu.psytest.service.dto.AnswerCriteria;
 import ru.vlsu.psytest.service.AnswerQueryService;
 
@@ -39,6 +41,9 @@ public class AnswerResourceIT {
 
     @Autowired
     private AnswerRepository answerRepository;
+
+    @Autowired
+    private AnswerMapper answerMapper;
 
     @Autowired
     private AnswerService answerService;
@@ -87,9 +92,10 @@ public class AnswerResourceIT {
     public void createAnswer() throws Exception {
         int databaseSizeBeforeCreate = answerRepository.findAll().size();
         // Create the Answer
+        AnswerDTO answerDTO = answerMapper.toDto(answer);
         restAnswerMockMvc.perform(post("/api/answers")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(answer)))
+            .content(TestUtil.convertObjectToJsonBytes(answerDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Answer in the database
@@ -106,11 +112,12 @@ public class AnswerResourceIT {
 
         // Create the Answer with an existing ID
         answer.setId(1L);
+        AnswerDTO answerDTO = answerMapper.toDto(answer);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restAnswerMockMvc.perform(post("/api/answers")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(answer)))
+            .content(TestUtil.convertObjectToJsonBytes(answerDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Answer in the database
@@ -118,6 +125,26 @@ public class AnswerResourceIT {
         assertThat(answerList).hasSize(databaseSizeBeforeCreate);
     }
 
+
+    @Test
+    @Transactional
+    public void checkAnswerIsRequired() throws Exception {
+        int databaseSizeBeforeTest = answerRepository.findAll().size();
+        // set the field null
+        answer.setAnswer(null);
+
+        // Create the Answer, which fails.
+        AnswerDTO answerDTO = answerMapper.toDto(answer);
+
+
+        restAnswerMockMvc.perform(post("/api/answers")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(answerDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Answer> answerList = answerRepository.findAll();
+        assertThat(answerList).hasSize(databaseSizeBeforeTest);
+    }
 
     @Test
     @Transactional
@@ -304,7 +331,7 @@ public class AnswerResourceIT {
     @Transactional
     public void updateAnswer() throws Exception {
         // Initialize the database
-        answerService.save(answer);
+        answerRepository.saveAndFlush(answer);
 
         int databaseSizeBeforeUpdate = answerRepository.findAll().size();
 
@@ -314,10 +341,11 @@ public class AnswerResourceIT {
         em.detach(updatedAnswer);
         updatedAnswer
             .answer(UPDATED_ANSWER);
+        AnswerDTO answerDTO = answerMapper.toDto(updatedAnswer);
 
         restAnswerMockMvc.perform(put("/api/answers")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(updatedAnswer)))
+            .content(TestUtil.convertObjectToJsonBytes(answerDTO)))
             .andExpect(status().isOk());
 
         // Validate the Answer in the database
@@ -332,10 +360,13 @@ public class AnswerResourceIT {
     public void updateNonExistingAnswer() throws Exception {
         int databaseSizeBeforeUpdate = answerRepository.findAll().size();
 
+        // Create the Answer
+        AnswerDTO answerDTO = answerMapper.toDto(answer);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restAnswerMockMvc.perform(put("/api/answers")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(answer)))
+            .content(TestUtil.convertObjectToJsonBytes(answerDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Answer in the database
@@ -347,7 +378,7 @@ public class AnswerResourceIT {
     @Transactional
     public void deleteAnswer() throws Exception {
         // Initialize the database
-        answerService.save(answer);
+        answerRepository.saveAndFlush(answer);
 
         int databaseSizeBeforeDelete = answerRepository.findAll().size();
 

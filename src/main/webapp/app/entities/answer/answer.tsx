@@ -57,8 +57,8 @@ export const Answer = (props: IAnswerProps) => {
                     </Button>
                   </td>
                   <td>{answer.answer ? 'true' : 'false'}</td>
-                  <td>{answer.question ? <Link to={`question/${answer.question.id}`}>{answer.question.id}</Link> : ''}</td>
-                  <td>{answer.resultTest ? <Link to={`result-test/${answer.resultTest.id}`}>{answer.resultTest.id}</Link> : ''}</td>
+                  <td>{answer.questionId ? <Link to={`question/${answer.questionId}`}>{answer.questionId}</Link> : ''}</td>
+                  <td>{answer.resultTestId ? <Link to={`result-test/${answer.resultTestId}`}>{answer.resultTestId}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${answer.id}`} color="info" size="sm">

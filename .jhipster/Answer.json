@@ -3,7 +3,8 @@
   "fields": [
     {
       "fieldName": "answer",
-      "fieldType": "Boolean"
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
     }
   ],
   "relationships": [
@@ -22,11 +23,11 @@
       "otherEntityField": "id"
     }
   ],
-  "changelogDate": "20201025183509",
+  "changelogDate": "20201025192448",
   "entityTableName": "answer",
-  "dto": "no",
+  "dto": "mapstruct",
   "pagination": "no",
-  "service": "serviceImpl",
+  "service": "serviceClass",
   "jpaMetamodelFiltering": true,
   "fluentMethods": true,
   "readOnly": false,

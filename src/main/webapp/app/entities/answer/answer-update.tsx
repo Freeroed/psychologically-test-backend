@@ -94,7 +94,7 @@ export const AnswerUpdate = (props: IAnswerUpdateProps) => {
                 <Label for="answer-question">
                   <Translate contentKey="psychologicallyTestBackendApp.answer.question">Question</Translate>
                 </Label>
-                <AvInput id="answer-question" type="select" className="form-control" name="question.id">
+                <AvInput id="answer-question" type="select" className="form-control" name="questionId">
                   <option value="" key="0" />
                   {questions
                     ? questions.map(otherEntity => (
@@ -109,7 +109,7 @@ export const AnswerUpdate = (props: IAnswerUpdateProps) => {
                 <Label for="answer-resultTest">
                   <Translate contentKey="psychologicallyTestBackendApp.answer.resultTest">Result Test</Translate>
                 </Label>
-                <AvInput id="answer-resultTest" type="select" className="form-control" name="resultTest.id">
+                <AvInput id="answer-resultTest" type="select" className="form-control" name="resultTestId">
                   <option value="" key="0" />
                   {resultTests
                     ? resultTests.map(otherEntity => (

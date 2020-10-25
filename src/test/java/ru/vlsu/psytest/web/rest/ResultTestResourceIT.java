@@ -5,6 +5,8 @@ import ru.vlsu.psytest.domain.ResultTest;
 import ru.vlsu.psytest.domain.User;
 import ru.vlsu.psytest.repository.ResultTestRepository;
 import ru.vlsu.psytest.service.ResultTestService;
+import ru.vlsu.psytest.service.dto.ResultTestDTO;
+import ru.vlsu.psytest.service.mapper.ResultTestMapper;
 import ru.vlsu.psytest.service.dto.ResultTestCriteria;
 import ru.vlsu.psytest.service.ResultTestQueryService;
 
@@ -82,6 +84,9 @@ public class ResultTestResourceIT {
     private ResultTestRepository resultTestRepository;
 
     @Autowired
+    private ResultTestMapper resultTestMapper;
+
+    @Autowired
     private ResultTestService resultTestService;
 
     @Autowired
@@ -148,9 +153,10 @@ public class ResultTestResourceIT {
     public void createResultTest() throws Exception {
         int databaseSizeBeforeCreate = resultTestRepository.findAll().size();
         // Create the ResultTest
+        ResultTestDTO resultTestDTO = resultTestMapper.toDto(resultTest);
         restResultTestMockMvc.perform(post("/api/result-tests")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(resultTest)))
+            .content(TestUtil.convertObjectToJsonBytes(resultTestDTO)))
             .andExpect(status().isCreated());
 
         // Validate the ResultTest in the database
@@ -177,11 +183,12 @@ public class ResultTestResourceIT {
 
         // Create the ResultTest with an existing ID
         resultTest.setId(1L);
+        ResultTestDTO resultTestDTO = resultTestMapper.toDto(resultTest);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restResultTestMockMvc.perform(post("/api/result-tests")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(resultTest)))
+            .content(TestUtil.convertObjectToJsonBytes(resultTestDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the ResultTest in the database
@@ -189,6 +196,206 @@ public class ResultTestResourceIT {
         assertThat(resultTestList).hasSize(databaseSizeBeforeCreate);
     }
 
+
+    @Test
+    @Transactional
+    public void checkFinishedAtIsRequired() throws Exception {
+        int databaseSizeBeforeTest = resultTestRepository.findAll().size();
+        // set the field null
+        resultTest.setFinishedAt(null);
+
+        // Create the ResultTest, which fails.
+        ResultTestDTO resultTestDTO = resultTestMapper.toDto(resultTest);
+
+
+        restResultTestMockMvc.perform(post("/api/result-tests")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(resultTestDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<ResultTest> resultTestList = resultTestRepository.findAll();
+        assertThat(resultTestList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkDemonstrativeTypeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = resultTestRepository.findAll().size();
+        // set the field null
+        resultTest.setDemonstrativeType(null);
+
+        // Create the ResultTest, which fails.
+        ResultTestDTO resultTestDTO = resultTestMapper.toDto(resultTest);
+
+
+        restResultTestMockMvc.perform(post("/api/result-tests")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(resultTestDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<ResultTest> resultTestList = resultTestRepository.findAll();
+        assertThat(resultTestList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkStuckTypeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = resultTestRepository.findAll().size();
+        // set the field null
+        resultTest.setStuckType(null);
+
+        // Create the ResultTest, which fails.
+        ResultTestDTO resultTestDTO = resultTestMapper.toDto(resultTest);
+
+
+        restResultTestMockMvc.perform(post("/api/result-tests")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(resultTestDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<ResultTest> resultTestList = resultTestRepository.findAll();
+        assertThat(resultTestList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkPedanticTypeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = resultTestRepository.findAll().size();
+        // set the field null
+        resultTest.setPedanticType(null);
+
+        // Create the ResultTest, which fails.
+        ResultTestDTO resultTestDTO = resultTestMapper.toDto(resultTest);
+
+
+        restResultTestMockMvc.perform(post("/api/result-tests")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(resultTestDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<ResultTest> resultTestList = resultTestRepository.findAll();
+        assertThat(resultTestList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkExcitableTypeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = resultTestRepository.findAll().size();
+        // set the field null
+        resultTest.setExcitableType(null);
+
+        // Create the ResultTest, which fails.
+        ResultTestDTO resultTestDTO = resultTestMapper.toDto(resultTest);
+
+
+        restResultTestMockMvc.perform(post("/api/result-tests")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(resultTestDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<ResultTest> resultTestList = resultTestRepository.findAll();
+        assertThat(resultTestList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkHyperthymicTypeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = resultTestRepository.findAll().size();
+        // set the field null
+        resultTest.setHyperthymicType(null);
+
+        // Create the ResultTest, which fails.
+        ResultTestDTO resultTestDTO = resultTestMapper.toDto(resultTest);
+
+
+        restResultTestMockMvc.perform(post("/api/result-tests")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(resultTestDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<ResultTest> resultTestList = resultTestRepository.findAll();
+        assertThat(resultTestList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkDysthymicTypeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = resultTestRepository.findAll().size();
+        // set the field null
+        resultTest.setDysthymicType(null);
+
+        // Create the ResultTest, which fails.
+        ResultTestDTO resultTestDTO = resultTestMapper.toDto(resultTest);
+
+
+        restResultTestMockMvc.perform(post("/api/result-tests")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(resultTestDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<ResultTest> resultTestList = resultTestRepository.findAll();
+        assertThat(resultTestList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkAnxiouslyFearfulTypeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = resultTestRepository.findAll().size();
+        // set the field null
+        resultTest.setAnxiouslyFearfulType(null);
+
+        // Create the ResultTest, which fails.
+        ResultTestDTO resultTestDTO = resultTestMapper.toDto(resultTest);
+
+
+        restResultTestMockMvc.perform(post("/api/result-tests")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(resultTestDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<ResultTest> resultTestList = resultTestRepository.findAll();
+        assertThat(resultTestList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkEmotionallyExaltedTypeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = resultTestRepository.findAll().size();
+        // set the field null
+        resultTest.setEmotionallyExaltedType(null);
+
+        // Create the ResultTest, which fails.
+        ResultTestDTO resultTestDTO = resultTestMapper.toDto(resultTest);
+
+
+        restResultTestMockMvc.perform(post("/api/result-tests")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(resultTestDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<ResultTest> resultTestList = resultTestRepository.findAll();
+        assertThat(resultTestList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkEmotiveTypeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = resultTestRepository.findAll().size();
+        // set the field null
+        resultTest.setEmotiveType(null);
+
+        // Create the ResultTest, which fails.
+        ResultTestDTO resultTestDTO = resultTestMapper.toDto(resultTest);
+
+
+        restResultTestMockMvc.perform(post("/api/result-tests")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(resultTestDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<ResultTest> resultTestList = resultTestRepository.findAll();
+        assertThat(resultTestList).hasSize(databaseSizeBeforeTest);
+    }
 
     @Test
     @Transactional
@@ -1435,7 +1642,7 @@ public class ResultTestResourceIT {
     @Transactional
     public void updateResultTest() throws Exception {
         // Initialize the database
-        resultTestService.save(resultTest);
+        resultTestRepository.saveAndFlush(resultTest);
 
         int databaseSizeBeforeUpdate = resultTestRepository.findAll().size();
 
@@ -1455,10 +1662,11 @@ public class ResultTestResourceIT {
             .emotionallyExaltedType(UPDATED_EMOTIONALLY_EXALTED_TYPE)
             .emotiveType(UPDATED_EMOTIVE_TYPE)
             .cyclothymicType(UPDATED_CYCLOTHYMIC_TYPE);
+        ResultTestDTO resultTestDTO = resultTestMapper.toDto(updatedResultTest);
 
         restResultTestMockMvc.perform(put("/api/result-tests")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(updatedResultTest)))
+            .content(TestUtil.convertObjectToJsonBytes(resultTestDTO)))
             .andExpect(status().isOk());
 
         // Validate the ResultTest in the database
@@ -1483,10 +1691,13 @@ public class ResultTestResourceIT {
     public void updateNonExistingResultTest() throws Exception {
         int databaseSizeBeforeUpdate = resultTestRepository.findAll().size();
 
+        // Create the ResultTest
+        ResultTestDTO resultTestDTO = resultTestMapper.toDto(resultTest);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restResultTestMockMvc.perform(put("/api/result-tests")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(resultTest)))
+            .content(TestUtil.convertObjectToJsonBytes(resultTestDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the ResultTest in the database
@@ -1498,7 +1709,7 @@ public class ResultTestResourceIT {
     @Transactional
     public void deleteResultTest() throws Exception {
         // Initialize the database
-        resultTestService.save(resultTest);
+        resultTestRepository.saveAndFlush(resultTest);
 
         int databaseSizeBeforeDelete = resultTestRepository.findAll().size();
 

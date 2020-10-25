@@ -1,8 +1,8 @@
 package ru.vlsu.psytest.web.rest;
 
-import ru.vlsu.psytest.domain.QuestionType;
 import ru.vlsu.psytest.service.QuestionTypeService;
 import ru.vlsu.psytest.web.rest.errors.BadRequestAlertException;
+import ru.vlsu.psytest.service.dto.QuestionTypeDTO;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -40,17 +41,17 @@ public class QuestionTypeResource {
     /**
      * {@code POST  /question-types} : Create a new questionType.
      *
-     * @param questionType the questionType to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new questionType, or with status {@code 400 (Bad Request)} if the questionType has already an ID.
+     * @param questionTypeDTO the questionTypeDTO to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new questionTypeDTO, or with status {@code 400 (Bad Request)} if the questionType has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/question-types")
-    public ResponseEntity<QuestionType> createQuestionType(@RequestBody QuestionType questionType) throws URISyntaxException {
-        log.debug("REST request to save QuestionType : {}", questionType);
-        if (questionType.getId() != null) {
+    public ResponseEntity<QuestionTypeDTO> createQuestionType(@Valid @RequestBody QuestionTypeDTO questionTypeDTO) throws URISyntaxException {
+        log.debug("REST request to save QuestionType : {}", questionTypeDTO);
+        if (questionTypeDTO.getId() != null) {
             throw new BadRequestAlertException("A new questionType cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        QuestionType result = questionTypeService.save(questionType);
+        QuestionTypeDTO result = questionTypeService.save(questionTypeDTO);
         return ResponseEntity.created(new URI("/api/question-types/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -59,21 +60,21 @@ public class QuestionTypeResource {
     /**
      * {@code PUT  /question-types} : Updates an existing questionType.
      *
-     * @param questionType the questionType to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated questionType,
-     * or with status {@code 400 (Bad Request)} if the questionType is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the questionType couldn't be updated.
+     * @param questionTypeDTO the questionTypeDTO to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated questionTypeDTO,
+     * or with status {@code 400 (Bad Request)} if the questionTypeDTO is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the questionTypeDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/question-types")
-    public ResponseEntity<QuestionType> updateQuestionType(@RequestBody QuestionType questionType) throws URISyntaxException {
-        log.debug("REST request to update QuestionType : {}", questionType);
-        if (questionType.getId() == null) {
+    public ResponseEntity<QuestionTypeDTO> updateQuestionType(@Valid @RequestBody QuestionTypeDTO questionTypeDTO) throws URISyntaxException {
+        log.debug("REST request to update QuestionType : {}", questionTypeDTO);
+        if (questionTypeDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        QuestionType result = questionTypeService.save(questionType);
+        QuestionTypeDTO result = questionTypeService.save(questionTypeDTO);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, questionType.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, questionTypeDTO.getId().toString()))
             .body(result);
     }
 
@@ -83,7 +84,7 @@ public class QuestionTypeResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of questionTypes in body.
      */
     @GetMapping("/question-types")
-    public List<QuestionType> getAllQuestionTypes() {
+    public List<QuestionTypeDTO> getAllQuestionTypes() {
         log.debug("REST request to get all QuestionTypes");
         return questionTypeService.findAll();
     }
@@ -91,20 +92,20 @@ public class QuestionTypeResource {
     /**
      * {@code GET  /question-types/:id} : get the "id" questionType.
      *
-     * @param id the id of the questionType to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the questionType, or with status {@code 404 (Not Found)}.
+     * @param id the id of the questionTypeDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the questionTypeDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/question-types/{id}")
-    public ResponseEntity<QuestionType> getQuestionType(@PathVariable Long id) {
+    public ResponseEntity<QuestionTypeDTO> getQuestionType(@PathVariable Long id) {
         log.debug("REST request to get QuestionType : {}", id);
-        Optional<QuestionType> questionType = questionTypeService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(questionType);
+        Optional<QuestionTypeDTO> questionTypeDTO = questionTypeService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(questionTypeDTO);
     }
 
     /**
      * {@code DELETE  /question-types/:id} : delete the "id" questionType.
      *
-     * @param id the id of the questionType to delete.
+     * @param id the id of the questionTypeDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/question-types/{id}")

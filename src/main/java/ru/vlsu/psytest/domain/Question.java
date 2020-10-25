@@ -5,6 +5,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 
@@ -23,10 +24,12 @@ public class Question implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "question")
+    @NotNull
+    @Column(name = "question", nullable = false)
     private String question;
 
-    @Column(name = "is_add")
+    @NotNull
+    @Column(name = "is_add", nullable = false)
     private Boolean isAdd;
 
     @ManyToOne

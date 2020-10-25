@@ -5,6 +5,8 @@ import ru.vlsu.psytest.domain.Question;
 import ru.vlsu.psytest.domain.QuestionType;
 import ru.vlsu.psytest.repository.QuestionRepository;
 import ru.vlsu.psytest.service.QuestionService;
+import ru.vlsu.psytest.service.dto.QuestionDTO;
+import ru.vlsu.psytest.service.mapper.QuestionMapper;
 import ru.vlsu.psytest.service.dto.QuestionCriteria;
 import ru.vlsu.psytest.service.QuestionQueryService;
 
@@ -41,6 +43,9 @@ public class QuestionResourceIT {
 
     @Autowired
     private QuestionRepository questionRepository;
+
+    @Autowired
+    private QuestionMapper questionMapper;
 
     @Autowired
     private QuestionService questionService;
@@ -91,9 +96,10 @@ public class QuestionResourceIT {
     public void createQuestion() throws Exception {
         int databaseSizeBeforeCreate = questionRepository.findAll().size();
         // Create the Question
+        QuestionDTO questionDTO = questionMapper.toDto(question);
         restQuestionMockMvc.perform(post("/api/questions")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(question)))
+            .content(TestUtil.convertObjectToJsonBytes(questionDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Question in the database
@@ -111,11 +117,12 @@ public class QuestionResourceIT {
 
         // Create the Question with an existing ID
         question.setId(1L);
+        QuestionDTO questionDTO = questionMapper.toDto(question);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restQuestionMockMvc.perform(post("/api/questions")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(question)))
+            .content(TestUtil.convertObjectToJsonBytes(questionDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Question in the database
@@ -123,6 +130,46 @@ public class QuestionResourceIT {
         assertThat(questionList).hasSize(databaseSizeBeforeCreate);
     }
 
+
+    @Test
+    @Transactional
+    public void checkQuestionIsRequired() throws Exception {
+        int databaseSizeBeforeTest = questionRepository.findAll().size();
+        // set the field null
+        question.setQuestion(null);
+
+        // Create the Question, which fails.
+        QuestionDTO questionDTO = questionMapper.toDto(question);
+
+
+        restQuestionMockMvc.perform(post("/api/questions")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(questionDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Question> questionList = questionRepository.findAll();
+        assertThat(questionList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkIsAddIsRequired() throws Exception {
+        int databaseSizeBeforeTest = questionRepository.findAll().size();
+        // set the field null
+        question.setIsAdd(null);
+
+        // Create the Question, which fails.
+        QuestionDTO questionDTO = questionMapper.toDto(question);
+
+
+        restQuestionMockMvc.perform(post("/api/questions")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(questionDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Question> questionList = questionRepository.findAll();
+        assertThat(questionList).hasSize(databaseSizeBeforeTest);
+    }
 
     @Test
     @Transactional
@@ -370,7 +417,7 @@ public class QuestionResourceIT {
     @Transactional
     public void updateQuestion() throws Exception {
         // Initialize the database
-        questionService.save(question);
+        questionRepository.saveAndFlush(question);
 
         int databaseSizeBeforeUpdate = questionRepository.findAll().size();
 
@@ -381,10 +428,11 @@ public class QuestionResourceIT {
         updatedQuestion
             .question(UPDATED_QUESTION)
             .isAdd(UPDATED_IS_ADD);
+        QuestionDTO questionDTO = questionMapper.toDto(updatedQuestion);
 
         restQuestionMockMvc.perform(put("/api/questions")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(updatedQuestion)))
+            .content(TestUtil.convertObjectToJsonBytes(questionDTO)))
             .andExpect(status().isOk());
 
         // Validate the Question in the database
@@ -400,10 +448,13 @@ public class QuestionResourceIT {
     public void updateNonExistingQuestion() throws Exception {
         int databaseSizeBeforeUpdate = questionRepository.findAll().size();
 
+        // Create the Question
+        QuestionDTO questionDTO = questionMapper.toDto(question);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restQuestionMockMvc.perform(put("/api/questions")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(question)))
+            .content(TestUtil.convertObjectToJsonBytes(questionDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Question in the database
@@ -415,7 +466,7 @@ public class QuestionResourceIT {
     @Transactional
     public void deleteQuestion() throws Exception {
         // Initialize the database
-        questionService.save(question);
+        questionRepository.saveAndFlush(question);
 
         int databaseSizeBeforeDelete = questionRepository.findAll().size();
 

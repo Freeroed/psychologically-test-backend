@@ -10,40 +10,40 @@
     <!--
         Added the entity ResultTest.
     -->
-    <changeSet id="20201025183409-1" author="jhipster">
+    <changeSet id="20201025192348-1" author="jhipster">
         <createTable tableName="result_test">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="finished_at" type="datetime">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="demonstrative_type" type="integer">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="stuck_type" type="integer">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="pedantic_type" type="integer">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="excitable_type" type="integer">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="hyperthymic_type" type="integer">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="dysthymic_type" type="integer">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="anxiously_fearful_type" type="integer">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="emotionally_exalted_type" type="integer">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="emotive_type" type="integer">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="cyclothymic_type" type="integer">
                 <constraints nullable="true" />
@@ -56,7 +56,7 @@
         <dropDefaultValue tableName="result_test" columnName="finished_at" columnDataType="datetime"/>
     </changeSet>
 
-    <changeSet id="20201025183409-1-relations" author="jhipster">
+    <changeSet id="20201025192348-1-relations" author="jhipster">
 
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -69,7 +69,7 @@
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
-    <changeSet id="20201025183409-1-data" author="jhipster" context="faker">
+    <changeSet id="20201025192348-1-data" author="jhipster" context="faker">
         <loadData
                   file="config/liquibase/fake-data/result_test.csv"
                   separator=";"

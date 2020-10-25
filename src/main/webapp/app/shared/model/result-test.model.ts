@@ -1,5 +1,4 @@
 import { Moment } from 'moment';
-import { IUser } from 'app/shared/model/user.model';
 
 export interface IResultTest {
   id?: number;
@@ -14,7 +13,7 @@ export interface IResultTest {
   emotionallyExaltedType?: number;
   emotiveType?: number;
   cyclothymicType?: number;
-  user?: IUser;
+  userId?: number;
 }
 
 export const defaultValue: Readonly<IResultTest> = {};

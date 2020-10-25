@@ -5,6 +5,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -24,34 +25,44 @@ public class ResultTest implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "finished_at")
+    @NotNull
+    @Column(name = "finished_at", nullable = false)
     private Instant finishedAt;
 
-    @Column(name = "demonstrative_type")
+    @NotNull
+    @Column(name = "demonstrative_type", nullable = false)
     private Integer demonstrativeType;
 
-    @Column(name = "stuck_type")
+    @NotNull
+    @Column(name = "stuck_type", nullable = false)
     private Integer stuckType;
 
-    @Column(name = "pedantic_type")
+    @NotNull
+    @Column(name = "pedantic_type", nullable = false)
     private Integer pedanticType;
 
-    @Column(name = "excitable_type")
+    @NotNull
+    @Column(name = "excitable_type", nullable = false)
     private Integer excitableType;
 
-    @Column(name = "hyperthymic_type")
+    @NotNull
+    @Column(name = "hyperthymic_type", nullable = false)
     private Integer hyperthymicType;
 
-    @Column(name = "dysthymic_type")
+    @NotNull
+    @Column(name = "dysthymic_type", nullable = false)
     private Integer dysthymicType;
 
-    @Column(name = "anxiously_fearful_type")
+    @NotNull
+    @Column(name = "anxiously_fearful_type", nullable = false)
     private Integer anxiouslyFearfulType;
 
-    @Column(name = "emotionally_exalted_type")
+    @NotNull
+    @Column(name = "emotionally_exalted_type", nullable = false)
     private Integer emotionallyExaltedType;
 
-    @Column(name = "emotive_type")
+    @NotNull
+    @Column(name = "emotive_type", nullable = false)
     private Integer emotiveType;
 
     @Column(name = "cyclothymic_type")

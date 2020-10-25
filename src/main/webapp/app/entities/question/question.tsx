@@ -59,7 +59,7 @@ export const Question = (props: IQuestionProps) => {
                   <td>{question.question}</td>
                   <td>{question.isAdd ? 'true' : 'false'}</td>
                   <td>
-                    {question.questionType ? <Link to={`question-type/${question.questionType.id}`}>{question.questionType.id}</Link> : ''}
+                    {question.questionTypeId ? <Link to={`question-type/${question.questionTypeId}`}>{question.questionTypeId}</Link> : ''}
                   </td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">

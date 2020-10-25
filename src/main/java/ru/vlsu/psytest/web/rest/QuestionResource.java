@@ -1,8 +1,8 @@
 package ru.vlsu.psytest.web.rest;
 
-import ru.vlsu.psytest.domain.Question;
 import ru.vlsu.psytest.service.QuestionService;
 import ru.vlsu.psytest.web.rest.errors.BadRequestAlertException;
+import ru.vlsu.psytest.service.dto.QuestionDTO;
 import ru.vlsu.psytest.service.dto.QuestionCriteria;
 import ru.vlsu.psytest.service.QuestionQueryService;
 
@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -45,17 +46,17 @@ public class QuestionResource {
     /**
      * {@code POST  /questions} : Create a new question.
      *
-     * @param question the question to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new question, or with status {@code 400 (Bad Request)} if the question has already an ID.
+     * @param questionDTO the questionDTO to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new questionDTO, or with status {@code 400 (Bad Request)} if the question has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/questions")
-    public ResponseEntity<Question> createQuestion(@RequestBody Question question) throws URISyntaxException {
-        log.debug("REST request to save Question : {}", question);
-        if (question.getId() != null) {
+    public ResponseEntity<QuestionDTO> createQuestion(@Valid @RequestBody QuestionDTO questionDTO) throws URISyntaxException {
+        log.debug("REST request to save Question : {}", questionDTO);
+        if (questionDTO.getId() != null) {
             throw new BadRequestAlertException("A new question cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Question result = questionService.save(question);
+        QuestionDTO result = questionService.save(questionDTO);
         return ResponseEntity.created(new URI("/api/questions/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -64,21 +65,21 @@ public class QuestionResource {
     /**
      * {@code PUT  /questions} : Updates an existing question.
      *
-     * @param question the question to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated question,
-     * or with status {@code 400 (Bad Request)} if the question is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the question couldn't be updated.
+     * @param questionDTO the questionDTO to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated questionDTO,
+     * or with status {@code 400 (Bad Request)} if the questionDTO is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the questionDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/questions")
-    public ResponseEntity<Question> updateQuestion(@RequestBody Question question) throws URISyntaxException {
-        log.debug("REST request to update Question : {}", question);
-        if (question.getId() == null) {
+    public ResponseEntity<QuestionDTO> updateQuestion(@Valid @RequestBody QuestionDTO questionDTO) throws URISyntaxException {
+        log.debug("REST request to update Question : {}", questionDTO);
+        if (questionDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        Question result = questionService.save(question);
+        QuestionDTO result = questionService.save(questionDTO);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, question.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, questionDTO.getId().toString()))
             .body(result);
     }
 
@@ -89,9 +90,9 @@ public class QuestionResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of questions in body.
      */
     @GetMapping("/questions")
-    public ResponseEntity<List<Question>> getAllQuestions(QuestionCriteria criteria) {
+    public ResponseEntity<List<QuestionDTO>> getAllQuestions(QuestionCriteria criteria) {
         log.debug("REST request to get Questions by criteria: {}", criteria);
-        List<Question> entityList = questionQueryService.findByCriteria(criteria);
+        List<QuestionDTO> entityList = questionQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
 
@@ -110,20 +111,20 @@ public class QuestionResource {
     /**
      * {@code GET  /questions/:id} : get the "id" question.
      *
-     * @param id the id of the question to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the question, or with status {@code 404 (Not Found)}.
+     * @param id the id of the questionDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the questionDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/questions/{id}")
-    public ResponseEntity<Question> getQuestion(@PathVariable Long id) {
+    public ResponseEntity<QuestionDTO> getQuestion(@PathVariable Long id) {
         log.debug("REST request to get Question : {}", id);
-        Optional<Question> question = questionService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(question);
+        Optional<QuestionDTO> questionDTO = questionService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(questionDTO);
     }
 
     /**
      * {@code DELETE  /questions/:id} : delete the "id" question.
      *
-     * @param id the id of the question to delete.
+     * @param id the id of the questionDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/questions/{id}")

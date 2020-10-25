@@ -84,7 +84,14 @@ export const QuestionUpdate = (props: IQuestionUpdateProps) => {
                 <Label id="questionLabel" for="question-question">
                   <Translate contentKey="psychologicallyTestBackendApp.question.question">Question</Translate>
                 </Label>
-                <AvField id="question-question" type="text" name="question" />
+                <AvField
+                  id="question-question"
+                  type="text"
+                  name="question"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                  }}
+                />
               </AvGroup>
               <AvGroup check>
                 <Label id="isAddLabel">
@@ -96,7 +103,7 @@ export const QuestionUpdate = (props: IQuestionUpdateProps) => {
                 <Label for="question-questionType">
                   <Translate contentKey="psychologicallyTestBackendApp.question.questionType">Question Type</Translate>
                 </Label>
-                <AvInput id="question-questionType" type="select" className="form-control" name="questionType.id">
+                <AvInput id="question-questionType" type="select" className="form-control" name="questionTypeId">
                   <option value="" key="0" />
                   {questionTypes
                     ? questionTypes.map(otherEntity => (

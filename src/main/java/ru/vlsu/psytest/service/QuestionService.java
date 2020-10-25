@@ -1,43 +1,85 @@
 package ru.vlsu.psytest.service;
 
 import ru.vlsu.psytest.domain.Question;
+import ru.vlsu.psytest.repository.QuestionRepository;
+import ru.vlsu.psytest.service.dto.QuestionDTO;
+import ru.vlsu.psytest.service.mapper.QuestionMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
- * Service Interface for managing {@link Question}.
+ * Service Implementation for managing {@link Question}.
  */
-public interface QuestionService {
+@Service
+@Transactional
+public class QuestionService {
+
+    private final Logger log = LoggerFactory.getLogger(QuestionService.class);
+
+    private final QuestionRepository questionRepository;
+
+    private final QuestionMapper questionMapper;
+
+    public QuestionService(QuestionRepository questionRepository, QuestionMapper questionMapper) {
+        this.questionRepository = questionRepository;
+        this.questionMapper = questionMapper;
+    }
 
     /**
      * Save a question.
      *
-     * @param question the entity to save.
+     * @param questionDTO the entity to save.
      * @return the persisted entity.
      */
-    Question save(Question question);
+    public QuestionDTO save(QuestionDTO questionDTO) {
+        log.debug("Request to save Question : {}", questionDTO);
+        Question question = questionMapper.toEntity(questionDTO);
+        question = questionRepository.save(question);
+        return questionMapper.toDto(question);
+    }
 
     /**
      * Get all the questions.
      *
      * @return the list of entities.
      */
-    List<Question> findAll();
+    @Transactional(readOnly = true)
+    public List<QuestionDTO> findAll() {
+        log.debug("Request to get all Questions");
+        return questionRepository.findAll().stream()
+            .map(questionMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
 
 
     /**
-     * Get the "id" question.
+     * Get one question by id.
      *
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<Question> findOne(Long id);
+    @Transactional(readOnly = true)
+    public Optional<QuestionDTO> findOne(Long id) {
+        log.debug("Request to get Question : {}", id);
+        return questionRepository.findById(id)
+            .map(questionMapper::toDto);
+    }
 
     /**
-     * Delete the "id" question.
+     * Delete the question by id.
      *
      * @param id the id of the entity.
      */
-    void delete(Long id);
+    public void delete(Long id) {
+        log.debug("Request to delete Question : {}", id);
+        questionRepository.deleteById(id);
+    }
 }

@@ -3,11 +3,13 @@
   "fields": [
     {
       "fieldName": "question",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "isAdd",
-      "fieldType": "Boolean"
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
     }
   ],
   "relationships": [
@@ -19,11 +21,11 @@
       "otherEntityField": "id"
     }
   ],
-  "changelogDate": "20201025183609",
+  "changelogDate": "20201025192548",
   "entityTableName": "question",
-  "dto": "no",
+  "dto": "mapstruct",
   "pagination": "no",
-  "service": "serviceImpl",
+  "service": "serviceClass",
   "jpaMetamodelFiltering": true,
   "fluentMethods": true,
   "readOnly": false,

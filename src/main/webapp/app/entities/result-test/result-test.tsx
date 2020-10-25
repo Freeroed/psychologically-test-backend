@@ -156,7 +156,7 @@ export const ResultTest = (props: IResultTestProps) => {
                   <td>{resultTest.emotionallyExaltedType}</td>
                   <td>{resultTest.emotiveType}</td>
                   <td>{resultTest.cyclothymicType}</td>
-                  <td>{resultTest.user ? resultTest.user.id : ''}</td>
+                  <td>{resultTest.userId ? resultTest.userId : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${resultTest.id}`} color="info" size="sm">
