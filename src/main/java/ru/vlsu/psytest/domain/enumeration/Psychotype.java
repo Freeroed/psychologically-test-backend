@@ -1,0 +1,8 @@
+package ru.vlsu.psytest.domain.enumeration;
+
+/**
+ * The Psychotype enumeration.
+ */
+public enum Psychotype {
+    DEMONSTRATIVE_TYPE, STUCK_TYPE, PEDANTIC_TYPE, EXCITABLE_TYPE, HYPERTHYMIC_TYPE, DYSTHYMIC_TYPE, ANXIOUSLY_FEARFULL_TYPE, EMOTIONALLY_TYPE, EMOTIVE_TYPE, CYCLOTHYMIC_TYPE
+}

@@ -10,7 +10,7 @@ const TestComp = () => <div>Test</div>;
 
 describe('private-route component', () => {
   beforeAll(() => {
-    TranslatorContext.registerTranslations('en', {});
+    TranslatorContext.registerTranslations('ru', {});
   });
 
   // All tests will go here

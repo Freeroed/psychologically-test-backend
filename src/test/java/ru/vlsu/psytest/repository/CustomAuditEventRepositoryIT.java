@@ -1,6 +1,6 @@
 package ru.vlsu.psytest.repository;
 
-import ru.vlsu.psytest.PsychologicallyTestApp;
+import ru.vlsu.psytest.PsychologicallyTestBackendApp;
 
 import ru.vlsu.psytest.config.Constants;
 import ru.vlsu.psytest.config.audit.AuditEventConverter;
@@ -28,7 +28,7 @@ import static ru.vlsu.psytest.repository.CustomAuditEventRepository.EVENT_DATA_C
 /**
  * Integration tests for {@link CustomAuditEventRepository}.
  */
-@SpringBootTest(classes = PsychologicallyTestApp.class)
+@SpringBootTest(classes = PsychologicallyTestBackendApp.class)
 @Transactional
 public class CustomAuditEventRepositoryIT {
 

@@ -1,6 +1,6 @@
 package ru.vlsu.psytest.service;
 
-import ru.vlsu.psytest.PsychologicallyTestApp;
+import ru.vlsu.psytest.PsychologicallyTestBackendApp;
 import ru.vlsu.psytest.config.Constants;
 import ru.vlsu.psytest.domain.User;
 import ru.vlsu.psytest.repository.UserRepository;
@@ -32,7 +32,7 @@ import static org.mockito.Mockito.when;
 /**
  * Integration tests for {@link UserService}.
  */
-@SpringBootTest(classes = PsychologicallyTestApp.class)
+@SpringBootTest(classes = PsychologicallyTestBackendApp.class)
 @Transactional
 public class UserServiceIT {
 

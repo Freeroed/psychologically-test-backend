@@ -1,6 +1,6 @@
 package ru.vlsu.psytest.config.timezone;
 
-import ru.vlsu.psytest.PsychologicallyTestApp;
+import ru.vlsu.psytest.PsychologicallyTestBackendApp;
 import ru.vlsu.psytest.repository.timezone.DateTimeWrapper;
 import ru.vlsu.psytest.repository.timezone.DateTimeWrapperRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Integration tests for the ZoneId Hibernate configuration.
  */
-@SpringBootTest(classes = PsychologicallyTestApp.class)
+@SpringBootTest(classes = PsychologicallyTestBackendApp.class)
 public class HibernateTimeZoneIT {
 
     @Autowired

@@ -1,6 +1,6 @@
 package ru.vlsu.psytest.web.rest;
 
-import ru.vlsu.psytest.PsychologicallyTestApp;
+import ru.vlsu.psytest.PsychologicallyTestBackendApp;
 import ru.vlsu.psytest.domain.PersistentAuditEvent;
 import ru.vlsu.psytest.repository.PersistenceAuditEventRepository;
 import ru.vlsu.psytest.security.AuthoritiesConstants;
@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @AutoConfigureMockMvc
 @WithMockUser(authorities = AuthoritiesConstants.ADMIN)
-@SpringBootTest(classes = PsychologicallyTestApp.class)
+@SpringBootTest(classes = PsychologicallyTestBackendApp.class)
 @Transactional
 public class AuditResourceIT {
 

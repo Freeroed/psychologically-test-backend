@@ -1,0 +1,30 @@
+{
+  "name": "QuestionType",
+  "fields": [
+    {
+      "fieldName": "type",
+      "fieldType": "Psychotype",
+      "fieldValues": "DEMONSTRATIVE_TYPE,STUCK_TYPE,PEDANTIC_TYPE,EXCITABLE_TYPE,HYPERTHYMIC_TYPE,DYSTHYMIC_TYPE,ANXIOUSLY_FEARFULL_TYPE,EMOTIONALLY_TYPE,EMOTIVE_TYPE,CYCLOTHYMIC_TYPE"
+    },
+    {
+      "fieldName": "coefficient",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20201025183709",
+  "entityTableName": "question_type",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -2,7 +2,7 @@ package ru.vlsu.psytest.service;
 
 import ru.vlsu.psytest.config.Constants;
 
-import ru.vlsu.psytest.PsychologicallyTestApp;
+import ru.vlsu.psytest.PsychologicallyTestBackendApp;
 import ru.vlsu.psytest.domain.User;
 import io.github.jhipster.config.JHipsterProperties;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,12 +40,12 @@ import static org.mockito.Mockito.*;
 /**
  * Integration tests for {@link MailService}.
  */
-@SpringBootTest(classes = PsychologicallyTestApp.class)
+@SpringBootTest(classes = PsychologicallyTestBackendApp.class)
 public class MailServiceIT {
 
     private static final String[] languages = {
-        "en",
-        "ru"
+        "ru",
+        "en"
         // jhipster-needle-i18n-language-constant - JHipster will add/remove languages in this array
     };
     private static final Pattern PATTERN_LOCALE_3 = Pattern.compile("([a-z]{2})-([a-zA-Z]{4})-([a-z]{2})");

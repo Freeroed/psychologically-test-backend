@@ -1,0 +1,36 @@
+{
+  "name": "Answer",
+  "fields": [
+    {
+      "fieldName": "answer",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "question",
+      "otherEntityRelationshipName": "answer",
+      "relationshipName": "question",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "resultTest",
+      "otherEntityRelationshipName": "answer",
+      "relationshipName": "resultTest",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20201025183509",
+  "entityTableName": "answer",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

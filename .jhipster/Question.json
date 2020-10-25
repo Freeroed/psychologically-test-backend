@@ -1,0 +1,33 @@
+{
+  "name": "Question",
+  "fields": [
+    {
+      "fieldName": "question",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isAdd",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "questionType",
+      "otherEntityRelationshipName": "question",
+      "relationshipName": "questionType",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20201025183609",
+  "entityTableName": "question",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

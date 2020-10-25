@@ -2,7 +2,7 @@ package ru.vlsu.psytest.service;
 
 import ru.vlsu.psytest.domain.PersistentAuditEvent;
 import ru.vlsu.psytest.repository.PersistenceAuditEventRepository;
-import ru.vlsu.psytest.PsychologicallyTestApp;
+import ru.vlsu.psytest.PsychologicallyTestBackendApp;
 import io.github.jhipster.config.JHipsterProperties;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Integration tests for {@link AuditEventService}.
  */
-@SpringBootTest(classes = PsychologicallyTestApp.class)
+@SpringBootTest(classes = PsychologicallyTestBackendApp.class)
 @Transactional
 public class AuditEventServiceIT {
     @Autowired

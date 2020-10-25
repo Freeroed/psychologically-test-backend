@@ -1,11 +1,11 @@
 version: '2'
 services:
-  psychologically_test-postgresql:
+  psychologically_test_backend-postgresql:
     image: postgres:12.3
     # volumes:
-    #     - ~/volumes/jhipster/psychologically_test/postgresql/:/var/lib/postgresql/data/
+    #     - ~/volumes/jhipster/psychologically_test_backend/postgresql/:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=psychologically_test
+      - POSTGRES_USER=psychologically_test_backend
       - POSTGRES_PASSWORD=
       - POSTGRES_HOST_AUTH_METHOD=trust
     ports:

@@ -48,6 +48,10 @@ public class CacheConfiguration {
             createCache(cm, ru.vlsu.psytest.domain.User.class.getName());
             createCache(cm, ru.vlsu.psytest.domain.Authority.class.getName());
             createCache(cm, ru.vlsu.psytest.domain.User.class.getName() + ".authorities");
+            createCache(cm, ru.vlsu.psytest.domain.ResultTest.class.getName());
+            createCache(cm, ru.vlsu.psytest.domain.Answer.class.getName());
+            createCache(cm, ru.vlsu.psytest.domain.Question.class.getName());
+            createCache(cm, ru.vlsu.psytest.domain.QuestionType.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

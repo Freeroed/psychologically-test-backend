@@ -1,6 +1,6 @@
 package ru.vlsu.psytest.web.rest;
 
-import ru.vlsu.psytest.PsychologicallyTestApp;
+import ru.vlsu.psytest.PsychologicallyTestBackendApp;
 import ru.vlsu.psytest.domain.User;
 import ru.vlsu.psytest.repository.UserRepository;
 import ru.vlsu.psytest.web.rest.vm.LoginVM;
@@ -27,7 +27,7 @@ import static org.hamcrest.Matchers.not;
  * Integration tests for the {@link UserJWTController} REST controller.
  */
 @AutoConfigureMockMvc
-@SpringBootTest(classes = PsychologicallyTestApp.class)
+@SpringBootTest(classes = PsychologicallyTestBackendApp.class)
 public class UserJWTControllerIT {
 
     @Autowired

@@ -1,0 +1,69 @@
+{
+  "name": "ResultTest",
+  "fields": [
+    {
+      "fieldName": "finishedAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "demonstrativeType",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "stuckType",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "pedanticType",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "excitableType",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "hyperthymicType",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "dysthymicType",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "anxiouslyFearfulType",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "emotionallyExaltedType",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "emotiveType",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "cyclothymicType",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "resultTest",
+      "relationshipName": "user",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20201025183409",
+  "entityTableName": "result_test",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

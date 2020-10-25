@@ -1,0 +1,33 @@
+{
+  "psychologicallyTestBackendApp": {
+    "resultTest": {
+      "home": {
+        "title": "Result Tests",
+        "createLabel": "Создать новый Result Test",
+        "createOrEditLabel": "Создать или отредактировать Result Test",
+        "notFound": "No Result Tests found"
+      },
+      "created": "Новый Result Test создан с идентификатором {{ param }}",
+      "updated": "Result Test обновлен с идентификатором {{ param }}",
+      "deleted": "Result Test удален с идентификатором {{ param }}",
+      "delete": {
+        "question": "Вы уверены что хотите удалить Result Test {{ id }}?"
+      },
+      "detail": {
+        "title": "Result Test"
+      },
+      "finishedAt": "Finished At",
+      "demonstrativeType": "Demonstrative Type",
+      "stuckType": "Stuck Type",
+      "pedanticType": "Pedantic Type",
+      "excitableType": "Excitable Type",
+      "hyperthymicType": "Hyperthymic Type",
+      "dysthymicType": "Dysthymic Type",
+      "anxiouslyFearfulType": "Anxiously Fearful Type",
+      "emotionallyExaltedType": "Emotionally Exalted Type",
+      "emotiveType": "Emotive Type",
+      "cyclothymicType": "Cyclothymic Type",
+      "user": "User"
+    }
+  }
+}

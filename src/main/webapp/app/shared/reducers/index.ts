@@ -12,6 +12,22 @@ import activate, { ActivateState } from 'app/modules/account/activate/activate.r
 import password, { PasswordState } from 'app/modules/account/password/password.reducer';
 import settings, { SettingsState } from 'app/modules/account/settings/settings.reducer';
 import passwordReset, { PasswordResetState } from 'app/modules/account/password-reset/password-reset.reducer';
+// prettier-ignore
+import resultTest, {
+  ResultTestState
+} from 'app/entities/result-test/result-test.reducer';
+// prettier-ignore
+import answer, {
+  AnswerState
+} from 'app/entities/answer/answer.reducer';
+// prettier-ignore
+import question, {
+  QuestionState
+} from 'app/entities/question/question.reducer';
+// prettier-ignore
+import questionType, {
+  QuestionTypeState
+} from 'app/entities/question-type/question-type.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -25,6 +41,10 @@ export interface IRootState {
   readonly passwordReset: PasswordResetState;
   readonly password: PasswordState;
   readonly settings: SettingsState;
+  readonly resultTest: ResultTestState;
+  readonly answer: AnswerState;
+  readonly question: QuestionState;
+  readonly questionType: QuestionTypeState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -40,6 +60,10 @@ const rootReducer = combineReducers<IRootState>({
   passwordReset,
   password,
   settings,
+  resultTest,
+  answer,
+  question,
+  questionType,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar,
 });

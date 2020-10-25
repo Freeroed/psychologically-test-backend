@@ -1,6 +1,6 @@
 package ru.vlsu.psytest.web.rest;
 
-import ru.vlsu.psytest.PsychologicallyTestApp;
+import ru.vlsu.psytest.PsychologicallyTestBackendApp;
 import ru.vlsu.psytest.config.Constants;
 import ru.vlsu.psytest.domain.User;
 import ru.vlsu.psytest.repository.AuthorityRepository;
@@ -37,7 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @AutoConfigureMockMvc
 @WithMockUser(value = TEST_USER_LOGIN)
-@SpringBootTest(classes = PsychologicallyTestApp.class)
+@SpringBootTest(classes = PsychologicallyTestBackendApp.class)
 public class AccountResourceIT {
     static final String TEST_USER_LOGIN = "test";
 
