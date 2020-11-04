@@ -8,7 +8,7 @@ import java.io.Serializable;
  * A DTO for the {@link ru.vlsu.psytest.domain.ResultTest} entity.
  */
 public class ResultTestDTO implements Serializable {
-    
+
     private Long id;
 
     @NotNull
@@ -45,7 +45,7 @@ public class ResultTestDTO implements Serializable {
 
 
     private Long userId;
-    
+
     public Long getId() {
         return id;
     }
@@ -147,6 +147,34 @@ public class ResultTestDTO implements Serializable {
     }
 
     public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public ResultTestDTO() {
+    }
+
+    public ResultTestDTO(
+        @NotNull Integer demonstrativeType,
+        @NotNull Integer stuckType,
+        @NotNull Integer pedanticType,
+        @NotNull Integer excitableType,
+        @NotNull Integer hyperthymicType,
+        @NotNull Integer dysthymicType,
+        @NotNull Integer anxiouslyFearfulType,
+        @NotNull Integer emotionallyExaltedType,
+        @NotNull Integer emotiveType,
+        @NotNull Integer cyclothymicType,
+        Long userId) {
+        this.demonstrativeType = demonstrativeType;
+        this.stuckType = stuckType;
+        this.pedanticType = pedanticType;
+        this.excitableType = excitableType;
+        this.hyperthymicType = hyperthymicType;
+        this.dysthymicType = dysthymicType;
+        this.anxiouslyFearfulType = anxiouslyFearfulType;
+        this.emotionallyExaltedType = emotionallyExaltedType;
+        this.emotiveType = emotiveType;
+        this.cyclothymicType = cyclothymicType;
         this.userId = userId;
     }
 
