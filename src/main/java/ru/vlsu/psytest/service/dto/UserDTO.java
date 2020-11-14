@@ -4,6 +4,7 @@ import ru.vlsu.psytest.config.Constants;
 
 import ru.vlsu.psytest.domain.Authority;
 import ru.vlsu.psytest.domain.User;
+import ru.vlsu.psytest.domain.enumeration.Gender;
 
 import javax.validation.constraints.*;
 import java.time.Instant;
@@ -50,6 +51,10 @@ public class UserDTO {
 
     private Set<String> authorities;
 
+    private Instant birthDate;
+
+    private Gender gender;
+
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -67,6 +72,8 @@ public class UserDTO {
         this.createdDate = user.getCreatedDate();
         this.lastModifiedBy = user.getLastModifiedBy();
         this.lastModifiedDate = user.getLastModifiedDate();
+        this.gender = user.getGender();
+        this.birthDate = user.getBirthDate();
         this.authorities = user.getAuthorities().stream()
             .map(Authority::getName)
             .collect(Collectors.toSet());
@@ -176,22 +183,41 @@ public class UserDTO {
         this.authorities = authorities;
     }
 
+    public Instant getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Instant birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
     // prettier-ignore
     @Override
     public String toString() {
         return "UserDTO{" +
-            "login='" + login + '\'' +
+            "id=" + id +
+            ", login='" + login + '\'' +
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
             ", imageUrl='" + imageUrl + '\'' +
             ", activated=" + activated +
             ", langKey='" + langKey + '\'' +
-            ", createdBy=" + createdBy +
+            ", createdBy='" + createdBy + '\'' +
             ", createdDate=" + createdDate +
             ", lastModifiedBy='" + lastModifiedBy + '\'' +
             ", lastModifiedDate=" + lastModifiedDate +
             ", authorities=" + authorities +
-            "}";
+            ", birthDate=" + birthDate +
+            ", gender=" + gender +
+            '}';
     }
 }

@@ -26,7 +26,8 @@ import java.util.*;
  */
 @RestController
 @RequestMapping("/api")
-public class AccountResource {
+public class
+AccountResource {
 
     private static class AccountResourceException extends RuntimeException {
         private AccountResourceException(String message) {
