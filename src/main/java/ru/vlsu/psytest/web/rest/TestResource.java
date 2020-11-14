@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.vlsu.psytest.service.TestService;
@@ -12,6 +13,7 @@ import ru.vlsu.psytest.service.dto.AnswerDTO;
 import ru.vlsu.psytest.service.dto.ResultTestDTO;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -29,7 +31,7 @@ public class TestResource {
     }
 
     @PostMapping("/test/solve")
-    public ResponseEntity SolveTest(List<AnswerDTO> answers) {
+    public ResponseEntity SolveTest(@RequestBody ArrayList<AnswerDTO> answers) {
         log.debug("REST request to solve test");
         String userName = httpServletRequest.getRemoteUser();
         ResultTestDTO resultTestDTO = testService.solveTest(answers, userName != null ? userName : "ANONIM");
