@@ -46,11 +46,12 @@ public class TestServiceImpl implements TestService {
             //TODO throw exception
             return null;
         }
+        ResultTestDTO result = new ResultTestDTO(0,0,0,0,0,0,0,0,0,0,null);
         if (username != "ANONIM") {
             Optional<UserDTO> user = userService.findUserByUserName(username);
-            ResultTestDTO result = new ResultTestDTO(0,0,0,0,0,0,0,0,0,0,user.get().getId());
+            result.setUserId(user.get().getId());
         }
-        ResultTestDTO result = new ResultTestDTO(0,0,0,0,0,0,0,0,0,0,null);
+
         for (AnswerDTO answer: answers) {
             Optional<QuestionDTO> question = questionService.findOne(answer.getQuestionId());
             Optional<QuestionTypeDTO> questionType = questionTypeService.findOne(question.get().getQuestionTypeId());
