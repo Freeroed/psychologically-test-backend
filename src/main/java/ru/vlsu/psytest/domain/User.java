@@ -85,12 +85,8 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "reset_date")
     private Instant resetDate = null;
 
-    public Instant getBirthDate() {
-        return birthDate;
-    }
-
     @Column(name = "birthdate")
-    private Instant birthDate;
+    private String birthDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "gender")
@@ -213,7 +209,11 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.authorities = authorities;
     }
 
-    public void setBirthDate(Instant birthDate) {
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 

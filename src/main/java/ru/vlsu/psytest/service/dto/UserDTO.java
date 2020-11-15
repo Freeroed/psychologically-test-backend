@@ -51,7 +51,7 @@ public class UserDTO {
 
     private Set<String> authorities;
 
-    private Instant birthDate;
+    private String birthDate;
 
     private Gender gender;
 
@@ -183,11 +183,11 @@ public class UserDTO {
         this.authorities = authorities;
     }
 
-    public Instant getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Instant birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
