@@ -3,6 +3,7 @@ package ru.vlsu.psytest.service;
 import ru.vlsu.psytest.config.Constants;
 import ru.vlsu.psytest.domain.Authority;
 import ru.vlsu.psytest.domain.User;
+import ru.vlsu.psytest.domain.enumeration.Gender;
 import ru.vlsu.psytest.repository.AuthorityRepository;
 import ru.vlsu.psytest.repository.UserRepository;
 import ru.vlsu.psytest.security.AuthoritiesConstants;
@@ -227,7 +228,7 @@ public class UserService {
      * @param langKey   language key.
      * @param imageUrl  image URL of user.
      */
-    public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl) {
+    public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl, Gender gender, String birthdate) {
         SecurityUtils.getCurrentUserLogin()
             .flatMap(userRepository::findOneByLogin)
             .ifPresent(user -> {
@@ -238,6 +239,8 @@ public class UserService {
                 }
                 user.setLangKey(langKey);
                 user.setImageUrl(imageUrl);
+                user.setBirthDate(birthdate);
+                user.setGender(gender);
                 this.clearUserCaches(user);
                 log.debug("Changed Information for User: {}", user);
             });
