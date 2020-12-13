@@ -2,8 +2,8 @@
   "psychologicallyTestBackendApp": {
     "question": {
       "home": {
-        "title": "Questions",
-        "createLabel": "Создать новый Question",
+        "title": "Вопросы",
+        "createLabel": "Создать новый вопрос",
         "createOrEditLabel": "Создать или отредактировать Question",
         "notFound": "No Questions found"
       },
@@ -16,9 +16,9 @@
       "detail": {
         "title": "Question"
       },
-      "question": "Question",
-      "isAdd": "Is Add",
-      "questionType": "Question Type"
+      "question": "Текст вопроса",
+      "isAdd": "Прибавляется",
+      "questionType": "Тип вопроса"
     }
   }
 }

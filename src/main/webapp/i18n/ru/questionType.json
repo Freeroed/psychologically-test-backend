@@ -2,8 +2,8 @@
   "psychologicallyTestBackendApp": {
     "questionType": {
       "home": {
-        "title": "Question Types",
-        "createLabel": "Создать новый Question Type",
+        "title": "Тип вопроса",
+        "createLabel": "Создать новый тип вопроса",
         "createOrEditLabel": "Создать или отредактировать Question Type",
         "notFound": "No Question Types found"
       },
@@ -16,9 +16,9 @@
       "detail": {
         "title": "Question Type"
       },
-      "type": "Type",
-      "coefficient": "Coefficient",
-      "description": "Description"
+      "type": "Тип",
+      "coefficient": "Коэффициент",
+      "description": "Описание"
     }
   }
 }

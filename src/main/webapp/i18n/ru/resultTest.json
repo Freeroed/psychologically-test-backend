@@ -2,8 +2,8 @@
   "psychologicallyTestBackendApp": {
     "resultTest": {
       "home": {
-        "title": "Result Tests",
-        "createLabel": "Создать новый Result Test",
+        "title": "Результаты теста",
+        "createLabel": "Создать новый результат теста",
         "createOrEditLabel": "Создать или отредактировать Result Test",
         "notFound": "No Result Tests found"
       },
@@ -16,18 +16,18 @@
       "detail": {
         "title": "Result Test"
       },
-      "finishedAt": "Finished At",
-      "demonstrativeType": "Demonstrative Type",
-      "stuckType": "Stuck Type",
-      "pedanticType": "Pedantic Type",
-      "excitableType": "Excitable Type",
-      "hyperthymicType": "Hyperthymic Type",
-      "dysthymicType": "Dysthymic Type",
-      "anxiouslyFearfulType": "Anxiously Fearful Type",
-      "emotionallyExaltedType": "Emotionally Exalted Type",
-      "emotiveType": "Emotive Type",
-      "cyclothymicType": "Cyclothymic Type",
-      "user": "User"
+      "finishedAt": "Дата окончания",
+      "demonstrativeType": "Демонстративный тип",
+      "stuckType": "Застревающий тип",
+      "pedanticType": "Педантичный тип",
+      "excitableType": "Возбудимый тип",
+      "hyperthymicType": "Гипертимный тип",
+      "dysthymicType": "Дистимический тип",
+      "anxiouslyFearfulType": "Тревожно боязливый",
+      "emotionallyExaltedType": "Аффективно-экзальтированный",
+      "emotiveType": "Эмотивный",
+      "cyclothymicType": "Циклотимный",
+      "user": "Пользователь"
     }
   }
 }
